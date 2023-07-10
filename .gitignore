@@ -17,3 +17,5 @@ yarn-error.log
 /.idea
 /.vscode
 /.phpunit.cache
+coverage.xml
+test.xml
