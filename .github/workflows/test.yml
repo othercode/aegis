@@ -9,10 +9,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     env:
       DB_DATABASE: laravel
       DB_USERNAME: root
       DB_PASSWORD: password
+
     services:
       mysql:
         image: mysql:latest
@@ -23,6 +25,7 @@ jobs:
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     strategy:
       matrix:
         php-version: [ "8.1", "8.2" ]
@@ -71,3 +74,30 @@ jobs:
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: unit-tests-results
+          path: |
+            coverage.xml
+            tests.xml
+
+  analysis:
+    runs-on: ubuntu-latest
+
+    needs: [ test ]
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: unit-tests-results
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
