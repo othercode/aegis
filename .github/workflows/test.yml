@@ -54,15 +54,16 @@ jobs:
           tools: composer:v2
 
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: |
+          composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+          npm install
 
       - name: Prepare the application
         run: |
           php -r "file_exists('.env') || copy('.env.example', '.env');"
           php artisan key:generate
-
-      - name: Clear Config
-        run: php artisan config:clear
+          php artisan config:clear
+          npm run build
 
       - name: Deploy Database Migrations
         run: php artisan migrate -v

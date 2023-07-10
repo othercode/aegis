@@ -15,20 +15,24 @@
     "require": {
         "php": "^8.1.0",
         "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/psr7": "^2.4.5",
+        "inertiajs/inertia-laravel": "^0.6.8",
         "laravel/framework": "^10.0",
+        "laravel/jetstream": "^3.2",
         "laravel/passport": "^11.3",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.7",
         "league/oauth2-server": "^8.5.3",
         "nyholm/psr7": "^1.6.1",
-        "guzzlehttp/psr7": "^2.4.5",
-        "symfony/http-kernel": "^6.2.6"
+        "symfony/http-kernel": "^6.2.6",
+        "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.23",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
+        "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-faker": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
         "spatie/laravel-ignition": "^2.0"
